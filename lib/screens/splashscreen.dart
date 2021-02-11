@@ -1,6 +1,6 @@
 import 'dart:async';
-
-import 'package:FlightTicket_app/screens/mainscreen.dart';
+import 'package:FlightTicket_app/common/colors.dart';
+import 'package:FlightTicket_app/screens/startbooking.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -16,7 +16,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     Timer(
         Duration(seconds: 10),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MainScreenPage())));
+            context, MaterialPageRoute(builder: (context) => StartBooking())));
   }
 
   @override
@@ -32,18 +32,22 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.network("https://www.makealltrip.com/template/img/loader.gif",height:125,width: 125,),
+              Image.network(
+                "https://www.makealltrip.com/template/img/loader.gif",
+                height: 125,
+                width: 125,
+              ),
               Image.asset("assets/splashlogo.png", height: 85, width: 85),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text("navana",
                     style: GoogleFonts.spartan(
-                        color: Colors.white,
+                        color: CustomizedColors.titlewhitecolor,
                         fontSize: 40,
                         fontWeight: FontWeight.bold)),
                 // Text(""),
                 Text(" air",
                     style: GoogleFonts.spartan(
-                        color: Colors.pink[300],
+                        color: CustomizedColors.titlepinkcolor,
                         fontSize: 40,
                         fontWeight: FontWeight.bold))
               ])
