@@ -2,6 +2,7 @@ import 'package:FlightTicket_app/common/colors.dart';
 import 'package:FlightTicket_app/common/strings.dart';
 import 'package:FlightTicket_app/components/raisedbutton.dart';
 import 'package:FlightTicket_app/components/spacer.dart';
+import 'package:FlightTicket_app/screens/signup.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,9 @@ class _StartBookingState extends State<StartBooking> {
   CarouselSlider carouselSlider;
   int _current = 0;
   List imgList = [
-    ImageList.image1,
-    ImageList.image2,
-    ImageList.image3,
+    ImageList.first_image,
+    ImageList.second_image,
+    ImageList.third_image,
   ];
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -39,7 +40,7 @@ class _StartBookingState extends State<StartBooking> {
           return SliderView(height=500);
       }
     } catch (e) {
-      
+
     }
   }
 
@@ -118,7 +119,9 @@ class _StartBookingState extends State<StartBooking> {
               children: <Widget>[
                 RaisedButtons(
                   text: Titles.startBooking,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+                  },
                 )
               ],
             ),

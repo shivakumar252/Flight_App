@@ -9,3 +9,12 @@ class SpacerClass extends StatelessWidget {
     );
   }
 }
+
+class SpaceClass extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+    height: 35.0,
+    );
+  }
+}
