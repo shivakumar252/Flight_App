@@ -77,10 +77,7 @@ class _SignUpState extends State<SignUp> {
                                 return null;
                             },
                             onSaved: (name) => _username = name,
-                            onFieldSubmitted: (_) {
-                              fieldFocusChange(
-                                  context, _usernameFocusNode, _emailFocusNode);
-                            },
+                      
                             onChanged: (value) {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
@@ -109,10 +106,7 @@ class _SignUpState extends State<SignUp> {
                                 return null;
                             },
                             onSaved: (email) => _email = email,
-                            onFieldSubmitted: (_) {
-                              fieldFocusChange(
-                                  context, _emailFocusNode, _passwordFocusNode);
-                            },
+                        
                             onChanged: (value) {
                               // print(_formKey.currentState.validate());
                               if (_formKey.currentState.validate()) {
@@ -244,8 +238,4 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
-void fieldFocusChange(
-    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-  currentFocus.unfocus();
-  FocusScope.of(context).requestFocus(nextFocus);
-}
+
