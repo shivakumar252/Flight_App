@@ -1,4 +1,4 @@
-import 'package:FlightTicket_app/screens/splashscreen.dart';
+import 'package:FlightTicket_app/screens/splash/splashscreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -2,7 +2,7 @@ import 'package:FlightTicket_app/common/colors.dart';
 import 'package:FlightTicket_app/common/strings.dart';
 import 'package:FlightTicket_app/components/raisedbutton.dart';
 import 'package:FlightTicket_app/components/spacer.dart';
-import 'package:FlightTicket_app/screens/signup.dart';
+import 'package:FlightTicket_app/screens/signup/signup.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

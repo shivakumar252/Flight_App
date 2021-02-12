@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:FlightTicket_app/common/colors.dart';
-import 'package:FlightTicket_app/screens/startbooking.dart';
+import 'package:FlightTicket_app/screens/booking/startbooking.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';

@@ -1,9 +1,13 @@
 import 'package:FlightTicket_app/common/colors.dart';
+import 'package:FlightTicket_app/common/patterns.dart';
+import 'package:FlightTicket_app/components/emailfield.dart';
+import 'package:FlightTicket_app/components/passwordfield.dart';
 import 'package:FlightTicket_app/components/raisedbutton.dart';
 import 'package:FlightTicket_app/components/spacer.dart';
+import 'package:FlightTicket_app/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../common/strings.dart';
+import '../../common/strings.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -11,17 +15,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  // ignore: unused_field
   String _username, _email, _password = "";
   final _formKey = GlobalKey<FormState>();
-
-  bool _isHidden = true;
-
-  void _togglePasswordView() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +26,10 @@ class _SignUpState extends State<SignUp> {
         children: [
           Stack(
             children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                child:Opacity(opacity: 0.5,child: Image.network("https://cdn.pixabay.com/photo/2013/07/12/12/54/world-map-146505__340.png",height: 200,width: 400,),) ),
               Padding(
                 padding: EdgeInsets.only(
                     top: 80.0, bottom: 20.0, left: 20.0, right: 20.0),
@@ -66,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                             keyboardType: TextInputType.name,
                             validator: (name) {
                               Pattern pattern =
-                                  r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$';
+                              Patterns.username_pattern;
                               RegExp regex = new RegExp(pattern);
                               if (!regex.hasMatch(name))
                                 return 'Invalid username';
@@ -88,87 +88,11 @@ class _SignUpState extends State<SignUp> {
                                     fontWeight: FontWeight.bold)),
                           ),
                           SizedBox(height: 10.0),
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (email) {
-                              Pattern pattern =
-                                  r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                                  r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                                  r"{0,253}[a-zA-Z0-9])?)*$";
-                              RegExp regex = new RegExp(pattern);
-                              if (!regex.hasMatch(email))
-                                return 'Invalid Email';
-                              else
-                                return null;
-                            },
-                            onSaved: (email) => _email = email,
-                        
-                            onChanged: (value) {
-                              // print(_formKey.currentState.validate());
-                              if (_formKey.currentState.validate()) {
-                                _formKey.currentState.save();
-                              }
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                              labelStyle: TextStyle(
-                                  color: CustomizedColors.emailtitle,
-                                  fontWeight: FontWeight.bold),
-
-                              suffixIcon: InkWell(
-                                  child: Icon(
-                                Icons.email,
-                                color: CustomizedColors.titlepinkcolor,
-                              )
-
-                                  // errorText: _wrongPassword ? _passwordText : null,
-
-                                  ),
-
-                              // errorText: _wrongEmail ? _emailText : null,
-                            ),
-                          ),
+                          Email(),
+                     
                           SizedBox(height: 10.0),
-                          TextFormField(
-                            obscureText: _isHidden,
-                            keyboardType: TextInputType.visiblePassword,
-                            validator: (password) {
-                              Pattern pattern =
-                                  r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-                              RegExp regex = new RegExp(pattern);
-                              if (!regex.hasMatch(password))
-                                return 'Invalid password';
-                              else
-                                return null;
-                            },
-                            onSaved: (password) => _password = password,
-                            onChanged: (password) {
-                              // password = value;
-                              if (_formKey.currentState.validate()) {
-                                _formKey.currentState.save();
-                              }
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: TextStyle(
-                                  color: CustomizedColors.emailtitle,
-                                  fontWeight: FontWeight.bold),
-                              suffixIcon: InkWell(
-                                  onTap: () {
-                                    _togglePasswordView();
-                                  },
-                                  child: Icon(
-                                    _isHidden
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: CustomizedColors.emailtitle,
-                                  )
-
-                                  // errorText: _wrongPassword ? _passwordText : null,
-
-                                  ),
-                            ),
-                          ),
+                          Password(),
+                        
                           SizedBox(height: 10.0),
                         ],
                       ),
@@ -192,7 +116,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Navigator.pushNamed(context, id);
+                               Navigator.push(context,MaterialPageRoute(builder: (context)=>Login()));
                             },
                             child: Text(
                               ' Sign In',

@@ -1,46 +1,59 @@
-import 'package:FlightTicket_app/blocs/bloc.dart';
-// import 'package:FlightTicket_app/blocs/providers.dart';
 import 'package:FlightTicket_app/common/colors.dart';
+import 'package:FlightTicket_app/common/patterns.dart';
 import 'package:flutter/material.dart';
 
+class Email extends StatefulWidget {
+  @override
+  _EmailState createState() => _EmailState();
+}
 
-// class Email extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final bloc = Provider.of(context);
+class _EmailState extends State<Email> {
+  final _formKey = GlobalKey<FormState>();
+  String _email;
+  @override
 
-//     return emailField(bloc);
-//   }
-// }
-Widget emailField(Bloc bloc) {
-  // StreamBuilder is the core of how widgets get updated.
-  return StreamBuilder(
-    // Watch the stream...
-    stream: bloc.email,
-    // Snapshot arg contains information from the stream. If there's an error, assign to error text.
-    builder: (context, snapshot) {
-      return TextField(
-        // onChanged listens to TextField changes and adds to bloc.changeEmail with '_email.sink.add'
-        onChanged: bloc.changeEmail,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          hintText: 'you@example.com',
-          labelText: 'Email Address',
-          labelStyle: TextStyle(
-              color: CustomizedColors.emailtitle, fontWeight: FontWeight.bold),
-          suffixIcon: InkWell(
-              child: Icon(
-            Icons.email,
-            color: CustomizedColors.titlepinkcolor,
-          )
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+        child: TextFormField(
+      keyboardType: TextInputType.emailAddress,
+      validator: (email) {
+        Pattern pattern = Patterns.email_pattern;
+        RegExp regex = new RegExp(pattern);
+        try{
+        if (!regex.hasMatch(email))
+          return 'Invalid Email';
+        else
+          return null;
+        }catch(exception){
+         throw(exception);
+        }
+        
+      },
+      onSaved: (email) => _email = email,
+      onChanged: (value) {
+        // print(_formKey.currentState.validate());
+        if (_formKey.currentState.validate()) {
+          _formKey.currentState.save();
+        }
+      },
+      decoration: InputDecoration(
+        labelText: 'Email',
+        labelStyle: TextStyle(
+            color: CustomizedColors.emailtitle, fontWeight: FontWeight.bold),
 
-              // errorText: _wrongPassword ? _passwordText : null,
+        suffixIcon: InkWell(
+            child: Icon(
+          Icons.email,
+          color: CustomizedColors.titlepinkcolor,
+        )
 
-              ),
-          // Take from snapshot, the error message
-          errorText: snapshot.error,
-        ),
-      );
-    },
-  );
+            // errorText: _wrongPassword ? _passwordText : null,
+
+            ),
+
+        // errorText: _wrongEmail ? _emailText : null,
+      ),
+    ));
+  }
 }
