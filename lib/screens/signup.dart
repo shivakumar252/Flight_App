@@ -13,9 +13,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   String _username, _email, _password = "";
   final _formKey = GlobalKey<FormState>();
-  FocusNode _usernameFocusNode = FocusNode();
-  FocusNode _emailFocusNode = FocusNode();
-  FocusNode _passwordFocusNode = FocusNode();
 
   bool _isHidden = true;
 
@@ -92,7 +89,6 @@ class _SignUpState extends State<SignUp> {
                           ),
                           SizedBox(height: 10.0),
                           TextFormField(
-                            focusNode: _emailFocusNode,
                             keyboardType: TextInputType.emailAddress,
                             validator: (email) {
                               Pattern pattern =
