@@ -2,9 +2,18 @@ import 'package:FlightTicket_app/common/colors.dart';
 import 'package:FlightTicket_app/common/strings.dart';
 import 'package:FlightTicket_app/components/raisedbutton.dart';
 import 'package:FlightTicket_app/components/spacer.dart';
-import 'package:FlightTicket_app/screens/signup/signup.dart';
+import 'package:FlightTicket_app/screens/homepage.dart';
+import 'package:FlightTicket_app/screens/login/login.dart';
+// import 'package:FlightTicket_app/screens/signup/signup.dart';
+import 'package:FlightTicket_app/services/login_authentication.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
 class StartBooking extends StatefulWidget {
   @override
@@ -12,6 +21,36 @@ class StartBooking extends StatefulWidget {
 }
 
 class _StartBookingState extends State<StartBooking> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void autoLogin() {
+    try {
+      if (FirebaseAuth.instance.currentUser() != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage()));
+        print("Logged In");
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      }
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
+  bool loading = false;
+
+  bool isLoggedIn = false;
+
+  void onLoginStatusChanged(bool isLoggedIn) {
+    setState(() {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
+
   CarouselSlider carouselSlider;
   int _current = 0;
   List imgList = [
@@ -35,13 +74,11 @@ class _StartBookingState extends State<StartBooking> {
     double width = MediaQuery.of(context).size.width;
     try {
       if (width > 600) {
-        return SliderView(height=150);
+        return SliderView(height = 150);
       } else {
-          return SliderView(height=500);
+        return SliderView(height = 500);
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
 //Slider View of the widget//
@@ -88,15 +125,14 @@ class _StartBookingState extends State<StartBooking> {
                       child: Image.asset(
                         imgUrl,
                         width: 600,
-                        fit:BoxFit.fitHeight,
+                        fit: BoxFit.fitHeight,
                       ),
                     );
                   },
                 );
               }).toList(),
             ),
-           SpacerClass(),
-
+            SpacerClass(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: map<Widget>(imgList, (index, url) {
@@ -118,11 +154,22 @@ class _StartBookingState extends State<StartBooking> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButtons(
-                  text: Titles.startBooking,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
-                  },
-                )
+                    text: Titles.startBooking,
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+                      autoLogin();
+                      // signInWithGoogle().then((result) {
+                      //   if (result != null) {
+                      //     Navigator.of(context).push(
+                      //       MaterialPageRoute(
+                      //         builder: (context) {
+                      //           return HomePage();
+                      //         },
+                      //       ),
+                      //     );
+                      //   }
+                      // });
+                    })
               ],
             ),
           ],
@@ -130,5 +177,4 @@ class _StartBookingState extends State<StartBooking> {
       ),
     );
   }
-
 }

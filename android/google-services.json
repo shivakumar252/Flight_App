@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "704270439675",
+    "project_id": "login-auth-app-49a5c",
+    "storage_bucket": "login-auth-app-49a5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704270439675:android:17753aa405ae9815574c5e",
+        "android_client_info": {
+          "package_name": "com.example.FlightTicket_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704270439675-d652vn6fg2mk2nrf3qdnad9cinh1m7nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCelGrVtUtCHLeOPCzar3Qih_vUtAi82T8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704270439675-d652vn6fg2mk2nrf3qdnad9cinh1m7nt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
